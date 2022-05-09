@@ -13,8 +13,16 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var {body, validationResult} = require('express-validator');
 var async =  require('async');
+
+//require in DOTENV document
+console.log(process.env.FOO);
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
+console.log(process.env.FOO);
+console.log(process.env.DB_LINK);//"mongodb+srv://m001-student:m001-mongodb-basics@cluster0.0cgbl.mongodb.net/user?retryWrites=true&w=majority"
 //conectio with DB
-const mongoDb = 'mongodb://127.0.0.1/myDB'//"mongodb+srv://m001-student:m001-mongodb-basics@cluster0.0cgbl.mongodb.net/user?retryWrites=true&w=majority";
+const mongoDb = process.env.DB_LINK;
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = Mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
