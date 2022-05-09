@@ -13,7 +13,23 @@
     <% if (user) {%>
     <h1>WELCOME BACK <%= user.username %>
     </h1>
-    <a href="/create-post" class="btn border add">+</a>
+    <form action="/create-post" method="post">
+      <p><Label for="title">Title</Label></p>
+      <p><input type="text" name="title" id="titleId" value = <%= publication === 'undefined' ? '': publication.title%> ></p>
+      <p><Label for="content">Content</Label></p>
+      <p><input type="textarea" name="content" id="contentId" value= <%= publication === 'undefined' ? '': publication.content%>></p>
+      <input type="hidden" name="userID" value= <%= user._id%> >
+      <button class="btn btn-primary">Create Post</button>
+    </form>
+      <% if(errors) { %>
+        <ul>
+          <% errors.forEach(function(err){ %>
+          <li>
+            <%= err.msg %> 
+          </li>
+          <% }); %> 
+        </ul>
+      <% } %>   
     <% } else { %>
       <h1>Please log in</h1>
       <form action="/log-in" method="POST">
@@ -24,16 +40,6 @@
         <button class="btn btn-primary">Log In</button>
       </form>
       <%}%>
-  </div>
-  <div>
-    <% if (user) {%>
-      <ul>
-        <% list_Publication.forEach(function(list){ %>
-        <li>
-          <%= list.content %> 
-        </li>
-        <% }); %> 
-    <% } %>
   </div>
   <footer>
     <%- include('./partials/footer.ejs'); -%>
