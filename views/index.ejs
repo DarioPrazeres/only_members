@@ -9,26 +9,29 @@
   </header>
   <div class="container">
     <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %> </h1>
-    <p>STATUS Member: <%= user.isMember %></p>
-    <p>STATUS Admin: <%= user.isAdmin %></p>
-    <a href="/create-post" class="btn border add">+</a>
+    <h1 class="text-center p-2">WELCOME BACK <%= user.username %> </h1>
+    <a href="/create-post" class="btn border add bg-dark">+</a>
     <% } else { %>
         <%- include('./partials/log-in.ejs'); -%>
       <%}%>
   </div>
-  <div>
+  <div class="container div-pub">
     <% if (user) {%>
       <% list_Publication.forEach(function(list){ %>
-        <div class="card m-4">
+        <div class=" m-4 p-4 text-center pub">
           <h1><%= list.title %></h1>
-          <p><%= list.content %></p>
-          <p>By: <%= list.user.username %></p>
+          <p><%= list.content %></p>          
+          <% if(user.isMember || user.isAdmin) { %>
+            <p>By: <%= list.user.username %></p>
+          <%}%>
+          <% if(user.isAdmin == true) { %>
+            <a class="btn btn-danger" href= <%= "/delete/" +  list._id %> >Delete Post</a>
+          <%}%>
         </div>
       <% }); %> 
     <% } %>
   </div>
-  <footer>
+  <footer class="bg-dark">
     <%- include('./partials/footer.ejs'); -%>
   </footer>
 </body>

@@ -20,9 +20,9 @@ if(process.env.NODE_ENV !== 'production'){
   require('dotenv').config();
 }
 console.log(process.env.FOO);
-console.log(process.env.DB_LINK);//"mongodb+srv://m001-student:m001-mongodb-basics@cluster0.0cgbl.mongodb.net/user?retryWrites=true&w=majority"
+console.log(process.env.DB_LINK);
 //conectio with DB
-const mongoDb = process.env.DB_LINK;
+const mongoDb = process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = Mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
@@ -96,7 +96,8 @@ app.get('/', function(req, res, next) {
 });
 app.use('/users', usersRouter);
 app.get('/sign-up', (req, res) => {
-  res.render('sign-up-form')
+  const errors = validationResult(req)
+  res.render('sign-up-form', {title: "Sign Up", user: req.user, errors: errors.array()})
 });
 app.post("/sign-up", (req, res, next) => {
   bcrypt.hash(req.body.password, 10, (err, hashedPassword)=>{
@@ -176,12 +177,54 @@ app.get('/be-admin', (req, res, next)=>{
   const errors = validationResult(req);
   res.render('be-admin', {user: req.user, title:'Be Admin', errors: errors.array()});
 })
+app.post('/be-admin', [
+  body('codeAdmin', 'You need to write Something').trim().isLength({min:1}).escape(),
+  (req, res, next) =>{
+    const errors = validationResult(req);
+    if(req.user.isAdmin == false){
+      if(req.body.codeAdmin == process.env.Password_Admin){
+        User.findByIdAndUpdate(req.user._id, {isAdmin: true},function(err, result){
+          if(err){return next(err);}
+          else if(!errors.isEmpty()){
+            res.render('be-admin', {title: 'Be Admin', user: req.user, errors: errors.array()})
+          }
+          else{
+            res.redirect('/');
+          }
+        });
+      }else{
+        res.render('be-admin', {title: 'Be Admin', user: req.user, errors: errors.array()})
+      }
+    }
+  }
+]);
+app.post('/log-out-member', (req, res, next)=>{
+  if(req.user.isMember == true){
+    User.findByIdAndUpdate(req.user._id, {isMember: false},function(err, result){
+      if(err){return next(err);}
+      res.redirect('/');
+    });
+  }
+});
+app.post('/log-out-admin', (req, res, next)=>{
+  if(req.user.isAdmin == true){
+    User.findByIdAndUpdate(req.user._id, {isAdmin: false},function(err, result){
+      if(err){return next(err);}
+      res.redirect('/');
+    });
+  }
+})
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 app.get("/log-out", (req, res) => {
   if(req.user.isMember == true){
     User.findByIdAndUpdate(req.user._id, {isMember: false},function(err, result){
+      if(err){return next(err);}
+    });
+  }
+  if(req.user.isAdmin == true){
+    User.findByIdAndUpdate(req.user._id, {isAdmin: false},function(err, result){
       if(err){return next(err);}
     });
   }

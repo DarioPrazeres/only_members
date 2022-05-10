@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/head', {title: title}); -%>
     <title>Sign Up</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
-  <form action="" method="POST">
-    <label for="username">Username</label>
-    <input name="username" placeholder="username" type="text" />
-    <label for="password">Password</label>
-    <input name="password" type="password" />
-    <button>Sign Up</button>
-  </form>
+  <header>
+    <%- include('./partials/header.ejs', {user: user}); -%>
+  </header>
+  <h1 class="text-center p-2">Sign Up</h1>
+  <div class="signup">
+    <form action="" method="POST">
+      <p><label for="username">Username</label></p>
+      <p><input name="username" placeholder="username" type="text" /></p>
+      <p><label for="password">Password</label></p>
+      <p><input name="password" type="password" /></p>
+      <button class="btn btn-primary">Sign Up</button>
+    </form>
+  </div>
+  <%- include('./partials/errors.ejs'); -%>
+  <footer>
+    <%- include('./partials/footer.ejs'); -%>
+  </footer>
 </body>
 </html>

@@ -9,25 +9,24 @@
     <%- include('./partials/header.ejs', {user: user}); -%>
   </header>
   <div class="container">
-    <% if (user) {%>
-    <h1><%= user.username %></h1>
-    <form action="/be-member" method="post">
-      <p><Label for="codeVIP">Secret Code</Label></p>
-      <p><input type="text" name="codeVIP" id="codeVIPId"></p>
-      <button class="btn btn-primary">Create Post</button>
-    </form>
-      <% if(errors) { %>
-        <ul>
-          <% errors.forEach(function(err){ %>
-          <li>
-            <%= err.msg %> 
-          </li>
-          <% }); %> 
-        </ul>
-      <% } %>   
+    <% if(user) {%>
+      <% if (user.isMember == false) {%>
+        <h1><%= user.username %></h1>
+        <form action="/be-member" method="post">
+          <p><Label for="codeVIP">Secret Code</Label></p>
+          <p><input type="text" name="codeVIP" id="codeVIPId"></p>
+          <button class="btn btn-primary">Be Member</button>
+        </form>
+        <% } if (user.isMember == true) {%> 
+          <form action="/log-out-member" method="post">
+            <p>Are you Sure to want to log out ?</p>
+            <button class="btn btn-primary">Log out Member</button>
+          </form>
+        <% } %>
     <% } else { %>
-        <%- include('./partials/log-in.ejs'); -%>
-      <%}%>
+      <%- include('./partials/log-in.ejs'); -%>
+    <%}%>
+    <%- include('./partials/errors.ejs'); -%>
   </div>
   <footer>
     <%- include('./partials/footer.ejs'); -%>

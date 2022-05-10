@@ -1,16 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
     <a class="navbar-brand" href="/"><h1>Only Member</h1></a>
     <ul class="navbar-nav mr-auto">
         <% if(user) {%>
+        
         <li class="nav-item">
             <a class='nav-link' href="/log-out">Log Out</a>
         </li>
-        <li class="nav-item">
-            <a class='nav-link' href="/be-member">Be Member</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/be-admin">Admin</a>
-        </li>
+        <% if(user.isMember == true) { %>
+            <li class="nav-item">
+                <a class='nav-link' href="/be-member">Log Out Member</a>
+            </li>
+        <% } else{ %>
+            <li class="nav-item">
+                <a class='nav-link' href="/be-member">Be Member</a>
+            </li>
+        <% } %>
+        <% if(user.isAdmin == true) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/be-admin">Log out Admin</a>
+            </li>
+        <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/be-admin">Admin</a>
+            </li>
+        <% }%>
         <% } else { %>
         <li class="nav-item">
             <a class='nav-link' href="/">Log In</a>
