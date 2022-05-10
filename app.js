@@ -154,11 +154,21 @@ app.get('/be-member', (req, res, next) => {
 app.post('/be-member', [
   body('codeVIP', 'You need to write Something').trim().isLength({min:1}).escape(),
   (req, res, next) =>{
+    const errors = validationResult(req);
     if(req.user.isMember == false){
-      User.findByIdAndUpdate(req.user._id, {isMember: true},function(err, result){
-        if(err){return next(err);}
-        res.redirect('/');
-      });
+      if(req.body.codeVIP == process.env.Password_Member){
+        User.findByIdAndUpdate(req.user._id, {isMember: true},function(err, result){
+          if(err){return next(err);}
+          else if(!errors.isEmpty()){
+            res.render('be-member', {title: 'Be Member', user: req.user, errors: errors.array()})
+          }
+          else{
+            res.redirect('/');
+          }
+        });
+      }else{
+        res.render('be-member', {title: 'Be Member', user: req.user, errors: errors.array()})
+      }
     }
   }
 ]);
