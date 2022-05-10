@@ -15,24 +15,18 @@
     </h1>
     <a href="/create-post" class="btn border add">+</a>
     <% } else { %>
-      <h1>Please log in</h1>
-      <form action="/log-in" method="POST">
-        <p><label for="username">Username</label></p>
-        <p><input name="username" placeholder="username" type="text" /></p>
-        <p><label for="password">Password</label></p>
-        <p><input name="password" type="password" /></p>
-        <button class="btn btn-primary">Log In</button>
-      </form>
+        <%- include('./partials/footer.ejs'); -%>
       <%}%>
   </div>
   <div>
     <% if (user) {%>
-      <ul>
-        <% list_Publication.forEach(function(list){ %>
-        <li>
-          <%= list.content %> 
-        </li>
-        <% }); %> 
+      <% list_Publication.forEach(function(list){ %>
+        <div class="card m-4">
+          <h1><%= list.title %></h1>
+          <p><%= list.content %></p>
+          <p>By: <%= list.user.username %></p>
+        </div>
+      <% }); %> 
     <% } %>
   </div>
   <footer>

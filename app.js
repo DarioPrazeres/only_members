@@ -31,7 +31,8 @@ const User = Mongoose.model(
   "User",
   new Schema({
     username: { type: String, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    status: {type: Boolean, required: true, default: false}
   })
 );
 const Publication = Mongoose.model(
@@ -86,7 +87,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res, next) {
-  Publication.find({}).sort({title: 1}).exec(function(err, result){
+  Publication.find({}).sort({title: 1}).populate('user').exec(function(err, result){
     if(err){return next(err);}
     res.render('index', { title: 'Home', user: req.user, list_Publication: result});
   })
@@ -144,6 +145,13 @@ app.post('/create-post', [
       })
     }
   }
+]);
+app.get('/be-member', (req, res, next) => {
+  const errors = validationResult(req);
+  res.render('be-member', {title: 'Be Member', user: req.user, errors: errors.array()})
+});
+app.post('/be-member', [
+
 ]);
 passport.serializeUser(function(user, done) {
   done(null, user.id);

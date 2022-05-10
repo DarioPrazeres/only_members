@@ -10,14 +10,10 @@
   </header>
   <div class="container">
     <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %>
-    </h1>
-    <form action="/create-post" method="post">
-      <p><Label for="title">Title</Label></p>
-      <p><input type="text" name="title" id="titleId" value = <%= publication === 'undefined' ? '': publication.title%> ></p>
-      <p><Label for="content">Content</Label></p>
-      <p><input type="textarea" name="content" id="contentId" value= <%= publication === 'undefined' ? '': publication.content%>></p>
-      <input type="hidden" name="userID" value= <%= user._id%> >
+    <h1><%= user.username %></h1>
+    <form action="/be-member" method="post">
+      <p><Label for="title">Secret Code</Label></p>
+      <p><input type="text" name="codeVIP" id="codeVIPId"></p>
       <button class="btn btn-primary">Create Post</button>
     </form>
       <% if(errors) { %>
