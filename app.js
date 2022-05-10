@@ -32,7 +32,8 @@ const User = Mongoose.model(
   new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
-    status: {type: Boolean, required: true, default: false}
+    isAdmin: {type: Boolean, required: true, default: false},
+    isMember: {type: Boolean, required: true, default: false}
   })
 );
 const Publication = Mongoose.model(
@@ -151,12 +152,29 @@ app.get('/be-member', (req, res, next) => {
   res.render('be-member', {title: 'Be Member', user: req.user, errors: errors.array()})
 });
 app.post('/be-member', [
-
+  body('codeVIP', 'You need to write Something').trim().isLength({min:1}).escape(),
+  (req, res, next) =>{
+    if(req.user.isMember == false){
+      User.findByIdAndUpdate(req.user._id, {isMember: true},function(err, result){
+        if(err){return next(err);}
+        res.redirect('/');
+      });
+    }
+  }
 ]);
+app.get('/be-admin', (req, res, next)=>{
+  const errors = validationResult(req);
+  res.render('be-admin', {user: req.user, title:'Be Admin', errors: errors.array()});
+})
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 app.get("/log-out", (req, res) => {
+  if(req.user.isMember == true){
+    User.findByIdAndUpdate(req.user._id, {isMember: false},function(err, result){
+      if(err){return next(err);}
+    });
+  }
   req.logout();
   res.redirect("/");
 });

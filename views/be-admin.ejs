@@ -12,8 +12,8 @@
     <% if (user) {%>
     <h1><%= user.username %></h1>
     <form action="/be-member" method="post">
-      <p><Label for="codeVIP">Secret Code</Label></p>
-      <p><input type="text" name="codeVIP" id="codeVIPId"></p>
+      <p><Label for="codeAdmin">Secret Code Admin</Label></p>
+      <p><input type="text" name="codeAdmin" id="codeAdminId"></p>
       <button class="btn btn-primary">Create Post</button>
     </form>
       <% if(errors) { %>

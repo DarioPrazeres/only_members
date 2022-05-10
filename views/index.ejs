@@ -11,11 +11,12 @@
   </header>
   <div class="container">
     <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %>
-    </h1>
+    <h1>WELCOME BACK <%= user.username %> </h1>
+    <p>STATUS Member: <%= user.isMember %></p>
+    <p>STATUS Admin: <%= user.isAdmin %></p>
     <a href="/create-post" class="btn border add">+</a>
     <% } else { %>
-        <%- include('./partials/footer.ejs'); -%>
+        <%- include('./partials/log-in.ejs'); -%>
       <%}%>
   </div>
   <div>
