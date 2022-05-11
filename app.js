@@ -17,7 +17,6 @@ var async =  require('async');
 
 //require in DOTENV document
 require('dotenv').config();
-console.log(dp);
 console.log(process.env.FOO);
 console.log(process.env.DB_LINK);
 //conectio with DB
