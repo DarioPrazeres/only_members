@@ -39,7 +39,7 @@
 
 ## Overview
 
-<img src='https://github.com/DarioPrazeres/only_members/blob/main/public/images/banner.png'>
+<img src='https://github.com/DarioPrazeres/only_members/blob/main/public/images/Banner.png'>
 
 <p>This project is to my skills in authetication and how to use bcrypt (a middleware express) to help me crypt password of user. And I use MVC base to help me create good views</p>
 <p>The user can login in system but there are any previlegious for who is member and admin. An user normal can create post but does not see who create it. Member can do everything user normal does but he can see who create it. Admin can do everything a member does and delete a post</p>
