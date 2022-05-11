@@ -16,13 +16,11 @@ var async =  require('async');
 
 //require in DOTENV document
 console.log(process.env.FOO);
-if(process.env.NODE_ENV !== 'production'){
-  require('dotenv').config();
-}
+require('dotenv').config();
 console.log(process.env.FOO);
 console.log(process.env.DB_LINK);
 //conectio with DB
-const mongoDb = 'mongodb+srv://DarioPrazeres:Fernandes1973@cluster0.xvrcp.mongodb.net/market?retryWrites=true&w=majority'; //process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
+const mongoDb = process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = Mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
