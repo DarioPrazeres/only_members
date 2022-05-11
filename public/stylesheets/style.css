@@ -35,3 +35,13 @@ footer{
 .login input{
   height: 40px;
 }
+.space{
+  height: 480px;
+}
+.content{
+  height: 100px;
+  width: 255px;
+}
+@media only screen and (max-width: 768px){
+
+}

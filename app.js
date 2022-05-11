@@ -212,6 +212,31 @@ app.post('/log-out-admin', (req, res, next)=>{
     });
   }
 })
+app.get('/delete/:id', (req, res, next) =>{
+  const errors = validationResult(req);
+  if(req.user.isAdmin == false){
+    res.redirect('/be-admin');
+  }else{
+    Publication.findById(req.params.id).populate('user').exec(function(err, publication){
+      if(err){return next(err);}
+      if(publication == null){
+        res.redirect('/');
+      }
+      res.render('delete-post', {title: 'Delete Publication', user: req.user, errors: errors.array(), publication:publication})
+    });
+    
+  }
+})
+app.post('/delete/:id', (req, res, next)=>{
+  if(req.user.isAdmin==false){
+    res.redirect('/');
+  }else{
+    Publication.findByIdAndRemove(req.body.postID, function deletePost(err){
+      if(err){next(err);}
+      res.redirect('/')
+    })
+  }
+})
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });

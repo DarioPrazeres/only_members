@@ -8,9 +8,9 @@
   <header>
     <%- include('./partials/header.ejs', {user: user}); -%>
   </header>
-  <h1 class="text-center p-2">Sign Up</h1>
-  <div class="signup">
-    <form action="" method="POST">
+  <div class="signup space">    
+    <h2 class="text-center">Sign Up</h2>
+    <form action="" method="POST" class="">
       <p><label for="username">Username</label></p>
       <p><input name="username" placeholder="username" type="text" /></p>
       <p><label for="password">Password</label></p>
@@ -19,7 +19,7 @@
     </form>
   </div>
   <%- include('./partials/errors.ejs'); -%>
-  <footer>
+  <footer class="bg-dark">
     <%- include('./partials/footer.ejs'); -%>
   </footer>
 </body>

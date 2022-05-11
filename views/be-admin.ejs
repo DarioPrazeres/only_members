@@ -8,17 +8,17 @@
   <header>
     <%- include('./partials/header.ejs', {user: user}); -%>
   </header>
-  <div class="container">
+  <div class="container space div-pub">
     <% if (user) {%>
     <% if(user.isAdmin == false) {%>
       <h1><%= user.username %></h1>
       <form action="/be-admin" method="post">
         <p><Label for="codeAdmin">Secret Code Admin</Label></p>
-        <p><input type="text" name="codeAdmin" id="codeAdminId"></p>
+        <p><input type="password" name="codeAdmin" id="codeAdminId"></p>
         <button class="btn btn-primary">Be Admin</button>
       </form>
     <% } if(user.isAdmin == true) {%>
-      <form action="/log-out-admin" method="post">
+      <form action="/log-out-admin" method="post" class="text-center">
         <p>Are you Sure to want to log out ?</p>
         <button class="btn btn-primary">Log out Admin</button>
       </form>
@@ -28,7 +28,7 @@
     <%}%>
     <%- include('./partials/errors.ejs'); -%>
   </div>
-  <footer>
+  <footer class="bg-dark">
     <%- include('./partials/footer.ejs'); -%>
   </footer>
 </body>

@@ -9,7 +9,7 @@
   </header>
   <div class="container">
     <% if (user) {%>
-    <h1 class="text-center p-2">WELCOME BACK <%= user.username %> </h1>
+    <h1 class="text-center p-2"><%= user.username %> </h1>
     <a href="/create-post" class="btn border add bg-dark">+</a>
     <% } else { %>
         <%- include('./partials/log-in.ejs'); -%>
@@ -19,7 +19,7 @@
     <% if (user) {%>
       <% list_Publication.forEach(function(list){ %>
         <div class=" m-4 p-4 text-center pub">
-          <h1><%= list.title %></h1>
+          <h3><%= list.title %></h3>
           <p><%= list.content %></p>          
           <% if(user.isMember || user.isAdmin) { %>
             <p>By: <%= list.user.username %></p>

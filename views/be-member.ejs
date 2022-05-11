@@ -8,17 +8,17 @@
   <header>
     <%- include('./partials/header.ejs', {user: user}); -%>
   </header>
-  <div class="container">
+  <div class="container div-pub space">
     <% if(user) {%>
       <% if (user.isMember == false) {%>
-        <h1><%= user.username %></h1>
+        <h2><%= title %></h2>
         <form action="/be-member" method="post">
           <p><Label for="codeVIP">Secret Code</Label></p>
-          <p><input type="text" name="codeVIP" id="codeVIPId"></p>
+          <p><input type="password" name="codeVIP" id="codeVIPId"></p>
           <button class="btn btn-primary">Be Member</button>
         </form>
         <% } if (user.isMember == true) {%> 
-          <form action="/log-out-member" method="post">
+          <form action="/log-out-member" method="post" class="text-center">
             <p>Are you Sure to want to log out ?</p>
             <button class="btn btn-primary">Log out Member</button>
           </form>
@@ -28,7 +28,7 @@
     <%}%>
     <%- include('./partials/errors.ejs'); -%>
   </div>
-  <footer>
+  <footer class="bg-dark">
     <%- include('./partials/footer.ejs'); -%>
   </footer>
 </body>

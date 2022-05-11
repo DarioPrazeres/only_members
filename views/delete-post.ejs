@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head', {title: title}); -%>
+</head>
+
+<body>
+  <header>
+    <%- include('./partials/header.ejs', {user: user}); -%>
+  </header>
+  <div class="container space div-pub">
+    <% if (user) {%>
+        <div class=" m-4 p-4 text-center pub">
+            <h3><%= publication.title %></h3>
+            <p><%= publication.content %></p> 
+            <p>By: <%= publication.user.username%></p>
+        </div>
+       
+    <% if(user.isAdmin == true) {%>
+      <form action="" method="post" class="text-center">
+        <p>Are you Sure to want to Delete?</p>
+        <input type="hidden" name="postID" required value= <%= publication._id %> >
+        <button class="btn btn-primary">Delete Post</button>
+      </form>
+    <% } %>
+    <% } else { %>
+        <%- include('./partials/log-in.ejs'); -%>
+    <%}%>
+    <%- include('./partials/errors.ejs'); -%>
+  </div>
+  <footer class="bg-dark">
+    <%- include('./partials/footer.ejs'); -%>
+  </footer>
+</body>
+
+</html>

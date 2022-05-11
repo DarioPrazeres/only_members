@@ -8,15 +8,14 @@
   <header>
     <%- include('./partials/header.ejs', {user: user}); -%>
   </header>
-  <div class="container">
+  <div class="container div-pub space">
     <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %>
-    </h1>
+    <h2><%= title %> </h2>
     <form action="/create-post" method="post">
       <p><Label for="title">Title</Label></p>
       <p><input type="text" name="title" id="titleId" value = <%= publication === 'undefined' ? '': publication.title%> ></p>
       <p><Label for="content">Content</Label></p>
-      <p><input type="textarea" name="content" id="contentId" value= <%= publication === 'undefined' ? '': publication.content%>></p>
+      <p><textarea class="content" name="content"id="" cols="30" rows="10" id="contentId" value= <%= publication === 'undefined' ? '': publication.content%> ></textarea></p>
       <input type="hidden" name="userID" value= <%= user._id%> >
       <button class="btn btn-primary">Create Post</button>
     </form>
@@ -33,7 +32,7 @@
         <%- include('./partials/log-in.ejs'); -%>
       <%}%>
   </div>
-  <footer>
+  <footer class="bg-dark">
     <%- include('./partials/footer.ejs'); -%>
   </footer>
 </body>
