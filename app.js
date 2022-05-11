@@ -17,7 +17,8 @@ var async =  require('async');
 
 //require in DOTENV document
 require('dotenv').config();
-console.log(process.env.DB_LINK);
+console.log("Eu sou o DB" + process.env.DB_LINK);
+console.log("Eu sou o Passsword" + process.env.Password_Admin);
 //conectio with DB
 const mongoDb = process.env.DB_LINK;
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
