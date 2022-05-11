@@ -2,7 +2,7 @@
 
 <!-- Please update value in the {}  -->
 
-<h1 align="center">Local library</h1>
+<h1 align="center">Only Members</h1>
 
 <div align="center">
    Solution for a challenge from  <a href="theodinproject.com" target="_blank">The Odin Project</a>.
