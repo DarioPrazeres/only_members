@@ -22,7 +22,7 @@ if(process.env.NODE_ENV !== 'production'){
 console.log(process.env.FOO);
 console.log(process.env.DB_LINK);
 //conectio with DB
-const mongoDb = process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
+const mongoDb = 'mongodb+srv://DarioPrazeres:Fernandes1973@cluster0.xvrcp.mongodb.net/market?retryWrites=true&w=majority'; //process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = Mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
