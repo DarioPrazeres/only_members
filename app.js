@@ -20,7 +20,7 @@ require('dotenv').config();
 console.log(process.env.FOO);
 console.log(process.env.DB_LINK);
 //conectio with DB
-const mongoDb = process.env.DB_LINK ||'mongodb://127.0.0.1/myDB';
+const mongoDb = process.env.DB_LINK;
 Mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = Mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
