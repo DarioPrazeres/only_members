@@ -14,9 +14,10 @@ var usersRouter = require('./routes/users');
 var {body, validationResult} = require('express-validator');
 var async =  require('async');
 
+
 //require in DOTENV document
-console.log(process.env.FOO);
 require('dotenv').config();
+console.log(dp);
 console.log(process.env.FOO);
 console.log(process.env.DB_LINK);
 //conectio with DB
