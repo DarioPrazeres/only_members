@@ -90,10 +90,10 @@ This application was created as a submission to a [The Odin Project](https://the
 <p>Run this comand in terminal: <code>git@github.com:DarioPrazeres/only_members.git</code></p>
 <p>After you clone with sucess</p>
 <p>Run this comand in terminal: <code>npm install</code></p>
-<p>Then open directorin terminal (CMD) and run: <code>npm ru devstart</code></p>
+<p>Then open directorin terminal (CMD) and run: <code>npm run devstart</code></p>
 <p>Open Browser and write it in URL: <code>localhost:3000</code></p>
 
 ## Contact
 
-- GitHub [@DarioPrazeres](https://{github.com/DarioPrazeres})
+- GitHub [@DarioPrazeres](https://github.com/DarioPrazeres})
 - Twitter [@dario_prazeres](https://twitter.com/dario_prazeres)
